@@ -1,5 +1,5 @@
 --TODO: Fix how Love2D handles this.
-print("Setting stdout's vbuf to 'no'")
+print("Set stdout's vbuf to 'no'")
 io.stdout:setvbuf("no")
 
 print("Running Lua version: ", _VERSION)
@@ -20,4 +20,3 @@ function love.keypressed(key, scancode, isrepeat)
 	end
 end
 
-require "tests.overload.main"

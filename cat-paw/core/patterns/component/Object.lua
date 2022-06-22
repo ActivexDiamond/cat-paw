@@ -1,10 +1,12 @@
 local middleclass = require "cat-paw.core.patterns.oop.middleclass"
+local uTable = require "cat-paw.core.utility.uTable")
 
 ------------------------------ Helpers ------------------------------
 
 ------------------------------ Constructor ------------------------------
-local GameObject = middleclass("GameObject")
-function GameObject:initialize()
+local Object = middleclass("Object")
+function Object:initialize(comps)
+	uTable.
 end
 
 ------------------------------ Core API ------------------------------
@@ -13,4 +15,4 @@ end
 
 ------------------------------ Getters / Setters ------------------------------
 
-return GameObject
+return Object

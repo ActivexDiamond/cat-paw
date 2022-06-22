@@ -3,8 +3,9 @@ local middleclass = require "cat-paw.core.patterns.oop.middleclass"
 ------------------------------ Helpers ------------------------------
 
 ------------------------------ Constructor ------------------------------
-local GameObject = middleclass("GameObject")
-function GameObject:initialize()
+local Object = middleclass("Object")
+function Object:initialize(comps)
+	
 end
 
 ------------------------------ Core API ------------------------------
@@ -13,4 +14,4 @@ end
 
 ------------------------------ Getters / Setters ------------------------------
 
-return GameObject
+return Object
