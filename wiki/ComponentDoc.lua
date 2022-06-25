@@ -19,9 +19,9 @@ class GameObject extends Object
 
 --------------- WIP ---------------
 class Component
-	_onStart(obj)
-	_onAwake()
-	_onDestroy()
+	onAdd(obj)
+	onReady()
+	onDestroy()
 	
 	update(dt)
 	fixedUpdate(dt)
@@ -39,9 +39,9 @@ end
 
 ------------------------------ Component Overview ------------------------------
 Creation:
-	_onStart(obj)						--Just added to component.
-	_onAwake()							--All components have been added.
-	_onDestroy()						--Destructor
+	onAdd(obj)						--Just added to component.
+	onReady()							--All components have been added.
+	onDestroy()						--Destructor
 	
 Updating:								--In order
 	Fire event-callbacks
