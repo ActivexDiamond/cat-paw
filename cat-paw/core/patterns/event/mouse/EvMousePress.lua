@@ -1,6 +1,6 @@
 local middleclass = require "cat-paw.core.patterns.oop.middleclass"
 
-local EvMouseClick = require "cat-paw.core.pattern.event.mouse.EvMouseClick"
+local EvMouseClick = require "cat-paw.core.patterns.event.mouse.EvMouseClick"
 
 local EvMousePress = middleclass("EvMousePress", EvMouseClick)
 function EvMousePress:initilize(x, y, button, touch)
