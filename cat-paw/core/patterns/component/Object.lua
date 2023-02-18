@@ -1,5 +1,5 @@
 local middleclass = require "cat-paw.core.patterns.oop.middleclass"
-local uTable = require "cat-paw.core.utility.uTable"
+local uTable = require "cat-paw.core.utilities.uTable"
 
 ------------------------------ Helpers ------------------------------
 
@@ -11,8 +11,10 @@ function Object:initialize(comps)
 	self.components = {}
 	
 	for k, v in ipairs(comps) do
-		assert(uTable.hasAllOf(comps, unpack(v.DEPENDENCIES)),
-				"Depedencies for " .. k .. " not satisfied!")
+		if v.DEPENDENCIES then
+			assert(uTable.hasAllOf(comps, v.DEPENDENCIES, self._componentEqualityChecker),
+					"Depedencies for " .. tostring(v) .. " not satisfied!")
+		end
 		self:_addComponent(v)
 	end
 	
@@ -41,28 +43,27 @@ function Object:draw(g2d)
 end
 
 ------------------------------ API ------------------------------
-function Object:attach(listener, event, callback)
-	error "WIP"
+function Object:has(comp)
+	return uTable.has(self.components, comp, self._componentEqualityChecker)
 end
 
-function Object:queue(event)
-	error "WIP"
-end
-
-function Object:has(dt)
-	error "WIP"
-end
-
-function Object:hasAllOf(dt)
-	error "WIP"
+function Object:hasAllOf(comps)
+	return uTable.hasAllOf(self.components, comps, self._componentEqualityChecker)
 end
 
 ------------------------------ Internals ------------------------------
+--IMPORTANT: This does NOT take a self parameter! Only included inside `Object` to allow
+--	its children to override its behavior.
+function Object._componentEqualityChecker(a, b)
+	return a:isInstanceOf(b)
+end
+
 function Object:_addComponent(comp)
 	table.insert(self.components, comp)
 	comp:onAdd(self)
 end
 
 ------------------------------ Getters / Setters ------------------------------
+function Object:getComponents() return self.components end
 
 return Object

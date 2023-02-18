@@ -45,6 +45,7 @@ local function nextBatch(t, pos)
 	end
 end
 
+--IMPORTANT: Cannot differntiate between a class (e.g. Event) and its isntance (e.g. Event())
 local function checkTypes(args, params)
 	local i = 1
 	local iOff = 0
@@ -62,13 +63,22 @@ local function checkTypes(args, params)
 				goto continue
 			end
 		end
-		if type(param) == 'string' then
-			if not overload.types[param](arg) then return false end
+		--print(param, arg, arg.class, arg.isInstanceOf, arg.isSubclassOf)
+
+		--Built-in or defined by overload.
+		if type(param) == 'string' and overload.types[param](arg) then
+			--print("Overload found match for built-in or library-defined argument (string identifier).")
+		--Instance of class (checks inheritance)
+		elseif type(arg) == 'table' and arg.isInstanceOf and
+					arg:isInstanceOf(param) then
+			--print("Overload found match for instance argument (identifier could be instance or class).")
+		--Class (checks inheritance)
+ 		elseif type(arg) == 'table' and arg.isSubclassOf and
+				(arg:isSubclassOf(param) or arg == param) then
+			--print("Overload found match for class argument (identifier could be instance or class).")
 		else
-			if not (type(arg) == 'table' and arg.isInstanceOf and
-					arg:isInstanceOf(param)) then 
-				return false 
-			end
+			--print("Overload found no match for argument.")
+			return false
 		end
 		
 		::continue::
@@ -145,8 +155,9 @@ overload.types = {
 	--Other
 }
 ------------------------------ API ------------------------------
---Have to ignore the first arg is it will be `self` due to `mt.__call`.
+--IMPORTANT: Cannot differntiate between a class (e.g. Event) and its isntance (e.g. Event())
 function overload.createOverload(_, opt)
+	--Have to ignore the first arg is it will be `self` due to `mt.__call`.
 	return function(...)
 		local args = {...}
 		local batch, i

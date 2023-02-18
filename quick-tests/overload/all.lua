@@ -1,5 +1,5 @@
 local middleclass = require "cat-paw.core.patterns.oop.middleclass"
-local overload = require "cat-paw.core.utilities.overload"
+local overload = require "cat-paw.core.patterns.overload"
 
 local Point = middleclass("Point")
 local Rect = middleclass("Rect")
@@ -97,3 +97,33 @@ echo('c', -1)
 echo('c', 0)
 echo('c', -1.5)
 
+--[[
+Expected output:
+
+Got an int!	1
+Got a string!	hello
+Got a number and string!	1	hello
+Got a string, a table(or nil), and a string!	hello	table: 0x7f4ba008b930	there!
+Got a string, a table(or nil), and a string!	no one's	nil	there!
+false	./cat-paw/core/patterns/overload.lua:159: No overload found for: {string, number, string}
+false	./cat-paw/core/patterns/overload.lua:159: No overload found for: {number, string, number}
+Got a point!	instance of class Point
+Got a point!	instance of class BetterPoint
+Got a number and a point!	1	instance of class Point
+Got a number and a point!	1	instance of class BetterPoint
+false	./cat-paw/core/patterns/overload.lua:159: No overload found for: {Rect}
+Got an int!	42
+Got a float!	0.5
+Got an int and a float!	1	0.5
+false	./cat-paw/core/patterns/overload.lua:159: No overload found for: {number, number}
+Got a char and a positiveInt!	c	1
+Got a char and a positiveInt!	c	0
+Got a char and a negativeInt!	c	-1
+Got a char and a positiveFloat!	c	1.5
+Got a char and a positiveFloat!	c	0.5
+Got a char and a positiveInt!	c	0
+Got a char and a negativeInt!	c	-1
+Got a char and a positiveInt!	c	0
+Got a char and a negativeFloat!	c	-1.5
+
+--]]

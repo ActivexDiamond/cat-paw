@@ -21,7 +21,6 @@ end
 
 ------------------------------ Internals ------------------------------
 function EventSystem:_rawAttach(target, event, callback)
-	print("called rawAttach", target, event, callback)
 	assert(event:isSubclassOf(Event) or event == Event, "May only attach Event or a subclass of it.")
 	assert(type(callback) == 'function', "Callback must be a function.")
 
@@ -66,6 +65,17 @@ EventSystem.attach = overload({
 	
 	EventSystem, 'table', Event, 'function',
 	EventSystem._rawAttach,
+	
+	--Add 4th option, only pass the object. Iterate all its keys and for every;
+	--	key.subclassof(Event) and type(val) == 'function' call _rawAttach on it.
+	-- This would be very slow so it should cache the class of every object after the first
+	-- call, so that subsuquent calls would just read from the cache.
+	-- WARN: This does mean changes made to the object (or even class) after the first cache will
+	-- not be noticed.
+	--EventSystem, 'table',
+	--function (self, target)
+	--
+	--end
 })
 
 function EventSystem:queue(event)

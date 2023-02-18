@@ -1,5 +1,5 @@
 local middleclass = require "cat-paw.core.patterns.oop.middleclass"
-local EvMouse = require "cat-paw.core.pattern.event.mouse.EvMouse"
+local EvMouse = require "cat-paw.core.patterns.event.mouse.EvMouse"
 
 local EvMouseMove = middleclass("EvMouseMove", EvMouse)
 function EvMouseMove:initilize(x, y, dx, dy, touch)

@@ -14,6 +14,10 @@ function GameObject:initialize(id, comps)
 end
 
 ------------------------------ Core API ------------------------------
+function GameObject:update(dt)
+	self.super.update(self, dt)
+	self.eventSystem:poll()
+end
 
 ------------------------------ API ------------------------------
 

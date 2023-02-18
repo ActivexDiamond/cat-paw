@@ -6,7 +6,7 @@ local EvMouse = require "cat-paw.core.patterns.event.mouse.EvMouse"
 local EvMouseClick = require "cat-paw.core.patterns.event.mouse.EvMouseClick"
 local EvMousePress = require "cat-paw.core.patterns.event.mouse.EvMousePress"
 
-local inspect = require "quick-tests.event.inspect"
+--local inspect = require "quick-tests.event.inspect"
 
 ------------------------------ EventSystem ------------------------------
 local aSys = EventSystem()
@@ -15,7 +15,8 @@ local bSys = EventSystem()
 ------------------------------ Constructor ------------------------------
 local Foo = middleclass("Foo")
 function Foo:initialize()
-	aSys:attach(self, {EvMouse, EvMouseClick, EvMousePress})
+	--aSys:attach(self, {EvMouse, EvMouseClick, EvMousePress})
+	aSys:attach(self)
 	bSys:attach(self, {EvMouse})
 end
 
@@ -32,9 +33,20 @@ Foo[EvMousePress] = function(self, e)
 	print("Got mouse press", e, e.button, e.direction)
 end
 
------------------------------- B Events ------------------------------
+--[[
+-- Case 1
+evSys:attach(self, EvMouse)
 
+-- Case 2
+evSys:attach(self, {EvMouse, EvKeyboard)
 
+-- Case 3
+evSys:attach(obj, EvMouse, obj.onMouseDoStuff)
+evSys:attach(obj, EvMouse, function()
+	--do stuff
+end)
+--]]
+	
 ------------------------------ Test ------------------------------
 
 --Should do nothing.
@@ -57,3 +69,21 @@ aSys:queue(EvMouse())
 bSys:queue(EvMouse())
 aSys:poll()
 bSys:poll()
+
+--[[
+Expected output:
+
+Got mouse press	instance of class EvMousePress	1	nil
+Got mouse click	instance of class EvMousePress	1	nil
+Got mouse	instance of class EvMousePress
+Got mouse	instance of class EvMouse
+Got mouse click	instance of class EvMouseClick	1	0
+Got mouse	instance of class EvMouseClick
+Got mouse press	instance of class EvMousePress	1	nil
+Got mouse click	instance of class EvMousePress	1	nil
+Got mouse	instance of class EvMousePress
+
+Got mouse	instance of class EvMouse
+Got mouse	instance of class EvMouse
+
+--]]
