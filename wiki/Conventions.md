@@ -57,13 +57,13 @@ U | Utility| uMath | Prefixes still respect casing for `class` vs `module`.
 ## Other
 1. `require` should only be used at the top of files.
 2. When requiring a module - do not rename it unless absolutely necessary (it causes a name collision, etc...)
-E.g. `AbstractGame = require "cat-paw.abstract.AbstractGame`
+E.g. `AbstractGame = require "cat-paw.engine.AbstractGame`
 3. `require` should be called without paranthesis.
 4. Tabs for indentation (not that important.)
-5. No concrete number is defined for line-wrapping; use your best judgmentExtremely short blocks (`if`, functions, loops, etc...) can be written on one line.
+5. No concrete number is defined for line-wrapping; use your best judgment. Extremely short blocks (plain getters, quick loops, etc...) can be written on one line.
 64. When hard-wrapping a line;
 	- The wrapped-part should be indented with 2-tabs (or what is equal) to differentiate it from normal scope change.
-	- If a list of `and`/`or`s, wrapping should come *after* an `and`/`or`.twice of what you normally indent. 
+	- If a list of `and`/`or`s; wrapping should come *after* an `and`/`or`.twice of what you normally indent. 
 E.g.
 ```lua
 function foo(a, b, c, d, f)
@@ -91,6 +91,3 @@ Those are only relevant if you are contributing to the source of CatPaw
 *See the example in `#Other/6`.*
 4. If a function/method takes an argument that is a table used to hold options/configurations (or to act as *named arguments*) that argument should be named `opt`.
 
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkwNjcyMTM1OV19
--->
