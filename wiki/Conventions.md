@@ -21,12 +21,10 @@ Local/Temp Var | `camelCase`
 Function/Method Arguments | `camelCase`
 
 ## Choosing Names
-1. Words should be spelled out fully as much as possible.
-	- The only exception is prefixes for class-type, except for;
+1. Words should be spelled out fully as much as possible, except;
 	- Prefixes for class-types and module-types (see list below).
 	- Short-lived variables; locals with a small scope, temp-variables, etc...
-	- Where an abbreviation (the first letter of each word in a multi-word name, not just cutting out letters rand module-types (see list below).
-2omly) is available and commonly known (E.g. `dt`, `Fsm`, `Json`, `Xml`, etc...).
+	- Where an abbreviation (the first letter of each word in a multi-word name, not just cutting out random letters) is available and commonly known (E.g. `dt`, `Fsm`, `Json`, `Xml`, etc...).
 	- If the full word is a Lua keyword. E.g. `function` as `func`.
 	- Practicality over purity - do what makes your code more readable, but try to be as stingy as possible with abbreviations. E.g.
 ```
@@ -43,8 +41,8 @@ end
 ```
 2. Abbreviations should not be all-caps; capitalize based on the name-case rules above.
 3. Variables and members should begin with a noun.
-34. Methods and functions should begin with a verb and describe an action.
-45. Setters should begin with `set`, getters with `get`, and getters-for-booleans with `is` or `can` (for whether they describe *state* or *ability* respectively).
+3. Methods and functions should begin with a verb and describe an action.
+4. Setters should begin with `set`, getters with `get`, and getters-for-booleans with `is` or `can` (for whether they describe *state* or *ability* respectively).
 
 ## Prefixes
 Prefix | Full Name | Example | Note
