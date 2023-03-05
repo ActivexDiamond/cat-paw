@@ -6,3 +6,6 @@ url: https://activexdiamond.github.io/cat-paw/
 
 aux_links: # remove if you don't want this link to appear on your pages
   Template Repository: https://github.com/ActivexDiamond/cat-paw
+
+# Color scheme supports "light" (default) and "dark"
+color_scheme: dark
