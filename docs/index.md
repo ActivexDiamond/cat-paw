@@ -1,9 +1,9 @@
 # Home
 ## Purr
-Thank you for choosing CatPaw to developt your wonderful games with! *pur*
+Thank you for choosing CatPaw to develop your wonderful games with! *purr*
 
 ## Intro / Concept
-*talk about the idea behind catpaw, what it is and isn't.
+*talk about the idea behind catpaw, what it is and isn't.*
 *talk about layers*
 
 ## Quickstart
