@@ -1,6 +1,6 @@
 --TODO: Fix how Love2D handles this.
 print("Setting stdout's vbuf to 'no'")
-io.stdout:setvbuf("no")
+io.stdout:setvbuf('no')
 
 print("Running Lua version: ", _VERSION)
 print("Running Love2d version: ", love.getVersion())
