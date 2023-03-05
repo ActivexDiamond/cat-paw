@@ -3,17 +3,17 @@
 Thank you for choosing CatPaw to develop your wonderful games with! *purr*
 
 ## Intro / Concept
-*talk about the idea behind catpaw, what it is and isn't.*
-*talk about layers*
+*Talk about the idea behind catpaw, what it is and isn't.*
+*Talk about layers.*
 
 ## Quickstart
-*insert example hello world*
+*Insert example hello world.*
 
 ## Feature Overview
-*list of features with quick examples*
+*List features with quick examples.*
 
 ## Feature List
-*full list of features*
+*Full list of features.*
 
 ## Tools
 *talk about the standalone tools that come with CatPaw*
