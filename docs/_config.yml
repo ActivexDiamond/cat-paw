@@ -1,3 +1,8 @@
-theme: jekyll-theme-minimal
 title: CatPaw
 description: Docs and other information related to CatPaw!
+theme: just-the-docs
+
+url: https://activexdiamond.github.io/cat-paw/
+
+aux_links: # remove if you don't want this link to appear on your pages
+  Template Repository: https://github.com/ActivexDiamond/cat-paw
