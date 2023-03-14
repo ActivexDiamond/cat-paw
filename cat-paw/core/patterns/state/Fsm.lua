@@ -30,7 +30,7 @@ function Fsm:goTo(id, ...)
 	if self.currentState then self.currentState:leave(state) end
 	local previous = self.currentState
 	self.currentState = state
-	self.currentState:enter(previous, ...)
+	self.currentState.enter(self.currentState, previous, ...)
 	return true
 end
 

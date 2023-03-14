@@ -7,9 +7,13 @@ local Event = require "cat-paw.core.patterns.event.Event"
 ------------------------------ Constructor ------------------------------
 local EventSystem = middleclass("EventSystem")
 function EventSystem:initialize()	
+	self.rootSubscribers = setmetatable({}, {__mode = "kv"})
 	self.events = {}
 	self.eventQueue = {}
 end
+
+------------------------------ Constants ------------------------------
+EventSystem.ATTACH_TO_ALL = 0
 
 ------------------------------ Core API ------------------------------
 function EventSystem:poll()
@@ -20,6 +24,12 @@ function EventSystem:poll()
 end
 
 ------------------------------ Internals ------------------------------
+function EventSystem:_fetchAllCallbacks(target, code)
+	assert(code == EventSystem.ATTACH_TO_ALL, "`attach` got called with invalid code. Should be equal to EventSystem.ATTACH_TO_ALL")
+	--If subscriber is already attached to one or more specific events, will crash!
+	table.insert(self.rootSubscribers, target) 
+end
+
 function EventSystem:_rawAttach(target, event, callback)
 	assert(event:isSubclassOf(Event) or event == Event, "May only attach Event or a subclass of it.")
 	assert(type(callback) == 'function', "Callback must be a function.")
@@ -32,12 +42,25 @@ end
 
 function EventSystem:_fire(eventInstance)
 	local event = eventInstance.class
+
+	for _, target in pairs(self.rootSubscribers) do
+		local hierarchyPosition = event
+		while hierarchyPosition ~= Event.super do
+			if type(target[hierarchyPosition]) == 'function' then
+				target[hierarchyPosition](target, eventInstance)
+			end
+			--Go up one step in the hierarchy.
+			hierarchyPosition = hierarchyPosition.super
+		end
+	end
+
 	local t = {}
 	for e, subscribers in pairs(self.events) do
 		if event:isSubclassOf(e) or e == event then
 			t[#t + 1] = {e, subscribers or {{}, {}}}
 		end
 	end
+	
 	table.sort(t, function(a, b)
 --		Returns true when the first is less than the second.
 		return a[1]:isSubclassOf(b[1])
@@ -52,30 +75,27 @@ end
 ------------------------------ API ------------------------------
 EventSystem.attach = overload({
 	EventSystem, 'table', Event,
-	function (self, target, event)
+	function(self, target, event)
+		--print("case 1", self, target, event, event.class, event:isSubclassOf(Event), event == Event)
 		self:_rawAttach(target, event, target[event])
 	end,
 	
 	EventSystem, 'table', 'table',
-	function (self, target, events)
+	function(self, target, events)
+		--print("case 2", self, target, events, events.class, events == Event)
+		--print(events[1].class, events[1] == Event, events[1]:isSubclassOf(Event))
 		for _, e in pairs(events) do
 			self:_rawAttach(target, e, target[e])
 		end
 	end,
-	
+
+	EventSystem, 'table', 'number',
+	function(self, target, getAllCode)
+		self:_fetchAllCallbacks(target, getAllCode)
+	end,
+		
 	EventSystem, 'table', Event, 'function',
 	EventSystem._rawAttach,
-	
-	--Add 4th option, only pass the object. Iterate all its keys and for every;
-	--	key.subclassof(Event) and type(val) == 'function' call _rawAttach on it.
-	-- This would be very slow so it should cache the class of every object after the first
-	-- call, so that subsuquent calls would just read from the cache.
-	-- WARN: This does mean changes made to the object (or even class) after the first cache will
-	-- not be noticed.
-	--EventSystem, 'table',
-	--function (self, target)
-	--
-	--end
 })
 
 function EventSystem:queue(event)
