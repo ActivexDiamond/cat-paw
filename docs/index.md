@@ -5,6 +5,7 @@ nav_order: 1
 
 # Purr
 Thank you for choosing CatPaw to develop your wonderful games with! *purr*
+
 <!---
 # Intro / Concept
 *TODO: Talk about the idea behind catpaw, what it is and isn't.*
@@ -16,6 +17,7 @@ Thank you for choosing CatPaw to develop your wonderful games with! *purr*
 
 # Overview
 See the [Overview](/cat-paw/Overview) page.
+
 <!---
 # Feature List
 *TODO: Full list of features.*
