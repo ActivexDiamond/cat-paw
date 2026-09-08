@@ -19,7 +19,7 @@ print("Example & Test Runner")
 print("============================================================")
 
 --TODO: Make a test runner here.
---Should that just be a stand-alone program that launches and manages love- (test-) instances?
+--Should that just be a standalone program that launches and manages love- (test-) instances?
 
 function love.keypressed(key, scancode, isrepeat)
 	if key == 'escape' then
@@ -32,4 +32,3 @@ end
 --require "quick-tests.event.eventSystem"
 --require "quick-tests.component.objectFunctionality"
 --require "quick-tests.uTable.all"
-
