@@ -1,3 +1,7 @@
+---
+title: Conventions
+nav_order: 10
+---
 
 # Conventions
 ## Naming & Code Style

@@ -1,3 +1,9 @@
+---
+title: Home
+nav_order: 1
+---
+
+
 # Home
 ## Purr
 Thank you for choosing CatPaw to develop your wonderful games with! *purr*
@@ -10,7 +16,7 @@ Thank you for choosing CatPaw to develop your wonderful games with! *purr*
 *TODO: Insert example hello world.*
 
 ## Overview
-See the [Conventions](/Conventions) page.
+See the [Overview](/cat-paw/Overview) page.
 
 ## Feature List
 *TODO: Full list of features.*
